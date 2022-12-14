@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+
 Route::get('/', function () {
     return view('loginf');
 });
@@ -21,4 +23,26 @@ Route::get('/home', function () {
 });
 Route::get('/registerform', function () {
     return view('registerf');
+});
+Route::get('/notif', function () {
+    return view('notifform');
+});
+Route::get('/contactus', function () {
+    return view('contactus');
+});
+Route::get('/display', function(){
+    $day = app('firebase.firestore')->database()->collection('nomnomcat')->document('7V5LFJEekUPyBEPCaOW3ZYHRP2K2')->snapshot();
+    print_r('Monday ='.$day->id());
+    print_r("<br>". 'Student Name = '.$day->data()['Monday']);
+    print_r('Tuesday ='.$day->id());
+    print_r("<br>". 'Student Name = '.$day->data()['Tuesday']);
+});
+
+Route::get('/insert', function(){
+    $stuRef = app('firebase.firestore')->database()->collection('Students')->newDocument();
+    $stuRef->set([
+        'first' => 'je',
+        'last' => 'slebew',
+        'age' => '6'
+    ]); 
 });

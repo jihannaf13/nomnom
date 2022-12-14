@@ -1,1 +1,1 @@
-alert('hai!');
+alert('Yay! Your cat is full now:D');

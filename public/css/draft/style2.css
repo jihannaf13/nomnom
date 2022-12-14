@@ -159,28 +159,11 @@ header .nav-bar{
   position: absolute;
   top: 25%;
   color: var(--white-color);
-  margin: 70px 200px;
+  margin: 0 200px;
   transition: 0.3s ease;
 }
 
 .swiper-slide .text-content .title{
-  font-size: 4em;
-  font-weight: 700;
-  text-shadow: var(--text-shadow);
-  margin-bottom: 20px;
-  transform: translateY(-50px);
-  opacity: 0;
-}
-
-.swiper-slide .text-content1{
-  position: absolute;
-  top: 25%;
-  color: var(--white-color);
-  margin: 10px 200px;
-  transition: 0.3s ease;
-}
-
-.swiper-slide .text-content .title1{
   font-size: 4em;
   font-weight: 700;
   text-shadow: var(--text-shadow);
@@ -276,8 +259,6 @@ header .nav-bar{
   transform: translateX(-50%);
   transition: 0.3s ease;
 }
-
-
 
 .thumbs-container{
   /* background: rgba(255, 255, 255, 0.1); */
@@ -479,3 +460,7 @@ header .nav-bar{
   }
 }
       
+a{
+  max-width: fit-content;
+  max-height: fit-content;
+}
