@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="css/style2.css">
   <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
 </head>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script> -->
 <body>
   <header>
     <div class="nav-bar">
@@ -55,7 +55,7 @@
             <h1 class="title">Your Cat's Data <span>Daily Routine</span></h1>
             <!-- <p>Your daily cat history</p> -->
             <div class="d-flex justify-content-center container shadow-lg text-center" style="background-color:white;">
-            <canvas id="myChart" class="my-3" style="width:100%;max-width:400px"></canvas>
+            <canvas id="myChart"class="my-3" style="width:100%;max-width:400px"></canvas>
             </div>  
             <div class="d-flex justify-content-center">
             <button class="read-btn" onclick="charty()" style="margin-right:10px;"><i class="uil uil-arrow-left"></i>Before</button>
@@ -85,62 +85,90 @@
     </div>
   </section>
 
+  <!-- import { initializeApp } from "https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"; -->
+  <!-- import { getAnalytics } from "https://www.gstatic.com/firebasejs/8.1.1/firebase-database.js"; -->
+
+  <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-database.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
 
-    // chart 1
-    var xValues = ['00.00','01.00','02.00','03.00','04.00','05.00','06.00','07.00','08.00','09.00','10.00','11.00','12.00','13.00','14.00','15.00','16.00','17.00','18.00','19.00','20.00','21.00','22.00','23.00'];
-    var yValues = [0,0,8,9,9,9,10,8,6,5,8,8,9,5,2,6,7,3,9,8,3,7,5,7]; 
-    //chart 2
-    var xValues2 = ['00.00','01.00','02.00','03.00','04.00','05.00','06.00','07.00','08.00','09.00','10.00','11.00','12.00','13.00','14.00','15.00','16.00','17.00','18.00','19.00','20.00','21.00','22.00','23.00'];
-    var yValues2 = [0,0,6,7,10,8,3,5,4,2,7,3,0,2,7,6,4,8,3,7,6,5,7,2];
-    //chart 1
-    new Chart("myChart", {
-      type: "line",
-      data: {
-        labels: xValues,
-        datasets: [{
-          fill: false,
-          lineTension: 0,
-          backgroundColor: "rgba(0,0,255,1.0)",
-          borderColor: "rgba(0,0,255,0.1)",
-          data: yValues
-        }]
-      },
-      options: {
-        legend: {display: false},
-        scales: {
-          yAxes: [{ticks: {min: 6, max:16}}],
+  // Import the functions you need from the SDKs you need
+  
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyA-QQsYjB36HdjTgoaLk0H8D2r32OeC0wE",
+    authDomain: "nomnom-cat.firebaseapp.com",
+    databaseURL: "https://nomnom-cat-default-rtdb.firebaseio.com",
+    projectId: "nomnom-cat",
+    storageBucket: "nomnom-cat.appspot.com",
+    messagingSenderId: "121041603347",
+    appId: "1:121041603347:web:9af7a9b5b09c4bcb44a8e6",
+    measurementId: "G-CVWEN32VY3"
+  };
+
+  let cat = 0;
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+  firebase.database()
+  .ref("abc")
+  .on("value", (snapshot) => {
+    cat = snapshot.val();
+  })
+
+  const unixTimestamp = Date.now();
+  const dateObject = new Date(unixTimestamp);
+  const timestamp = dateObject.toLocaleString("en-US", {hour: "numeric", minute: "numeric"});
+
+  const myCanvas = document.getElementById('myChart');
+  const myChart = new Chart(myCanvas,{
+    type: 'line',
+    data:{
+      labels:[timestamp, timestamp, timestamp, timestamp, timestamp, timestamp],
+      datasets: [{
+        label: 'Cat history',
+        data: [Math.random() * 100, Math.random() * 100, Math.random() * 100, Math.random() * 100, Math.random() * 100, Math.random() * 100],
+        backgroundColor: [
+          'rgb(110,80,225)'
+        ],
+        borderColor: [
+          'rgb(110,80,225)'
+        ],
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
         }
       }
-    });
-
-    new Chart("myChart2", {
-      type: "line",
-      data: {
-        labels: xValues2,
-        datasets: [{
-          fill: false,
-          lineTension: 0,
-          backgroundColor: "rgba(0,0,255,1.0)",
-          borderColor: "rgba(0,0,255,0.1)",
-          data: yValues2
-        }]
-      },
-      options: {
-        legend: {display: false},
-        scales: {
-          yAxes: [{ticks: {min: 6, max:16}}],
-        }
-      }
-    });
-
-    function charty() {
-      // <div class="d-flex justify-content-center container shadow-lg text-center" style="background-color:white;">
-      // <canvas id="myChart2" class="my-3" style="width:100%;max-width:400px"></canvas> 
-
     }
+  });
+
+ (function loop() {
+    const unixTimestamp = Date.now();
+    const dateObject = new Date(unixTimestamp);
+    const timestamp = dateObject.toLocaleString("en-US", {hour: "numeric", minute: "numeric"});
+
+    var catData = Math.random() * 100;
+
+
+    myChart.data.datasets[0].data.push(catData);
+    myChart.data.datasets[0].data.splice(0,1);
+    myChart.data.labels.push(timestamp);
+    myChart.data.labels.splice(0,1);
+    myChart.update();
+    window.setTimeout(loop, 5000);
+ })();
 
 </script>
+
+
 <!-- https://console.firebase.google.com/u/2/project/nomnom-cat/overview?pli=1 link firebase -->
   <script src="js/swiper-bundle.min.js"></script>
   <script src="js/main.js"></script>
