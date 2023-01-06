@@ -51,11 +51,11 @@
         </div>
         <div class="swiper-slide dark-layer">
           <img src="https://cdn.discordapp.com/attachments/984015287923929122/1042495335941029908/NomNomCat_1.png" alt="">
-          <div class="text-content">
+          <div class="text-content2">
             <h1 class="title">Your Cat's Data <span>Daily Routine</span></h1>
             <!-- <p>Your daily cat history</p> -->
             <div class="d-flex justify-content-center container shadow-lg text-center" style="background-color:white;">
-            <canvas id="myChart"class="my-3" style="width:100%;max-width:400px"></canvas>
+            <canvas id="myChart"class="my-3" style="width:100%;max-width:600px"></canvas>
             </div>  
             <div class="d-flex justify-content-center">
             <button class="read-btn" onclick="charty()" style="margin-right:10px;"><i class="uil uil-arrow-left"></i>Before</button>
@@ -101,14 +101,14 @@
   // Your web app's Firebase configuration
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
   const firebaseConfig = {
-    apiKey: "AIzaSyA-QQsYjB36HdjTgoaLk0H8D2r32OeC0wE",
-    authDomain: "nomnom-cat.firebaseapp.com",
-    databaseURL: "https://nomnom-cat-default-rtdb.firebaseio.com",
-    projectId: "nomnom-cat",
-    storageBucket: "nomnom-cat.appspot.com",
-    messagingSenderId: "121041603347",
-    appId: "1:121041603347:web:9af7a9b5b09c4bcb44a8e6",
-    measurementId: "G-CVWEN32VY3"
+    apiKey: "AIzaSyBgD7abiuhx2MPZfuVEFGl-eBWpP_mYAD0",
+    authDomain: "nomnomcatv2.firebaseapp.com",
+    databaseURL: "https://nomnomcatv2-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "nomnomcatv2",
+    storageBucket: "nomnomcatv2.appspot.com",
+    messagingSenderId: "456161596626",
+    appId: "1:456161596626:web:05e72611395fc025a3090b",
+    measurementId: "G-PYMCPCMQ9D"
   };
 
   let cat = 0;
@@ -116,7 +116,7 @@
   firebase.initializeApp(firebaseConfig);
 
   firebase.database()
-  .ref("abc")
+  .ref("Urxw9gjZjGYojR5bwcAqH0q79G82")
   .on("value", (snapshot) => {
     cat = snapshot.val();
   })
@@ -153,17 +153,61 @@
  (function loop() {
     const unixTimestamp = Date.now();
     const dateObject = new Date(unixTimestamp);
+    const day = dateObject.getDay();
     const timestamp = dateObject.toLocaleString("en-US", {hour: "numeric", minute: "numeric"});
 
     var catData = Math.random() * 100;
+    var daycat = {};
+    // console.log(typeof(cat.Wednesday.jamdua));
+    // const entries;
 
+    switch(day) {
+      case 0:
+        daycat = cat.Sunday;
+        break;
+      case 1:
+        daycat = cat.Monday;
+        break;
+      case 2:
+        daycat = cat.Tuesday;
+        break;
+      case 3:
+        daycat = cat.Wednesday;
+        // entries = Object.entries(daycat);
+        // console.log(entries);
+        break;
+      case 4:
+        daycat = cat.Thursday;
+        break;
+      case 5:
+        daycat = cat.Friday;
+        break;
+      case 6:
+        daycat = cat.Saturday;
+        break;
+    }
 
-    myChart.data.datasets[0].data.push(catData);
+    
+
+    // console.log(typeof(daycat));
+
+    // var entries = Object.entries(daycat);
+
+    // console.log(Object.entries(daycat));
+    try {
+      for(let x in daycat){
+        console.log(x + ": "+ daycat[x])
+        myChart.data.datasets[0].data.push(daycat[x]);
+      }
+    } catch (error) {
+      console.log(error);
+      console.log(typeof(daycat));
+    }
     myChart.data.datasets[0].data.splice(0,1);
     myChart.data.labels.push(timestamp);
     myChart.data.labels.splice(0,1);
     myChart.update();
-    window.setTimeout(loop, 5000);
+    window.setTimeout(loop, 1000);
  })();
 
 </script>

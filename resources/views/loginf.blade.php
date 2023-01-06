@@ -65,13 +65,13 @@
 </div>
 <script>
 		var firebaseConfig = {
-			apiKey: "AIzaSyA-QQsYjB36HdjTgoaLk0H8D2r32OeC0wE",
-            authDomain: "nomnom-cat.firebaseapp.com",
-            databaseURL: "https://nomnom-cat-default-rtdb.firebaseio.com",
-            projectId: "nomnom-cat",
-            storageBucket: "nomnom-cat.appspot.com",
-            messagingSenderId: "121041603347",
-            appId: "1:121041603347:web:9af7a9b5b09c4bcb44a8e6",
+			apiKey: "AIzaSyBgD7abiuhx2MPZfuVEFGl-eBWpP_mYAD0",
+			authDomain: "nomnomcatv2.firebaseapp.com",
+			databaseURL: "https://nomnomcatv2-default-rtdb.asia-southeast1.firebasedatabase.app",
+			projectId: "nomnomcatv2",
+			storageBucket: "nomnomcatv2.appspot.com",
+			messagingSenderId: "456161596626",
+			appId: "1:456161596626:web:05e72611395fc025a3090b",
 		};
 
 		firebase.initializeApp(firebaseConfig);
@@ -106,6 +106,36 @@
 				email: email,
 			});
 		}
+
+		function signIn()
+		{
+			$email = "angelicdemon@gmail.com";
+			$pass = "anya123";
+
+			try {
+				$signInResult = $this->auth->signInWithEmailAndPassword($email, $pass);
+				// dump($signInResult->data());
+
+				Session::put('firebaseUserId', $signInResult->firebaseUserId());
+				Session::put('idToken', $signInResult->idToken());
+				Session::save();
+
+				dd($signInResult);
+			} catch (\Throwable $e) {
+				switch ($e->getMessage()) {
+					case 'INVALID_PASSWORD':
+						dd("Kata sandi salah!.");
+						break;
+					case 'EMAIL_NOT_FOUND':
+						dd("Email tidak ditemukan.");
+						break;
+					default:
+						dd($e->getMessage());
+						break;
+				}
+			}
+    }
+
 	</script>
 
 <script src="js/sript.js"></script>
