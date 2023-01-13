@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,11 +19,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('loginf');
 });
+
+
 Route::get('/home', function () {
     return view('home');
 });
 Route::get('/registerform', function () {
-    return view('registerf');
+    return view('loginf');
 });
 Route::get('/notif', function () {
     return view('notifform');
@@ -46,3 +49,6 @@ Route::get('/insert', function(){
         'age' => '6'
     ]); 
 });
+
+Route::post('/register',[UserController::class, 'register']);
+Route::post('/login',[UserController::class, 'login']);

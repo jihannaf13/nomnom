@@ -16,8 +16,9 @@
 		<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
 		<input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Register</label>
 		<div class="login-form">
-		<form id="login-form">
-
+		
+		<form form action="/login" method="post">
+		@csrf
 			<div class="sign-in-htm">
 				<div class="group">
 					<label for="email" class="label">Email</label>
@@ -25,7 +26,7 @@
 				</div>
 				<div class="group">
 					<label for="pass" class="label">Password</label>
-					<input id="pass" type="password" class="input" data-type="password">
+					<input id="pass" class="input" data-type="text">
 				</div>
 				<div class="group">
 					<input id="check" type="checkbox" class="check" checked>
@@ -41,6 +42,8 @@
 				</form>
 			</div>
 			<!-- <form action="/userarea" method="post"> -->
+			<form action="/register" method="post">
+			@csrf
 			<div class="sign-up-htm">
 				<div class="group">
 					<label for="email" class="label">Email</label>
@@ -55,14 +58,15 @@
 					<input id="pass" type="password" class="input" data-type="password" name="userPassword2">
 				</div>
 				<div class="group">
-					<a href="/home"><input type="submit" class="button" value="Sign Up"></a>
+					<!-- <a href="/home"><input type="submit" class="button" value="Sign Up"></a> -->
+					<button class="button" type="submit">Sign Up</button>
 				</div>
 				<div class="hr"></div>
 				<div class="foot-lnk">
 					<label for="tab-1">Already Member?</a>
 				</div>
 			</div>
-			<!-- </form> -->
+			</form>
 		</div>
 	</div>
 </div>
@@ -70,6 +74,8 @@
 <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-database.js"></script>
+
+
 
 <script>
 		var firebaseConfig = {
@@ -100,7 +106,8 @@
 			var password = getInputVal('pass');
 			firebase.auth().signInWithEmailAndPassword(email.trim(),password).then(function(user){
 				{
-					<?php header("location:/home")?>
+					<?php header("location:http://127.0.0.1:8000/home")?>
+					console.log('success');
 				}
 			}).catch(function(error) {
 			// Handle errors
@@ -124,7 +131,7 @@
 				email: email,
 			});
 		}
-	
+		}
 		
 
 	</script>
