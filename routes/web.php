@@ -50,5 +50,5 @@ Route::get('/insert', function(){
     ]); 
 });
 
-Route::post('/register',[UserController::class, 'register']);
-Route::post('/login',[UserController::class, 'login']);
+// Route::post('/register',[UserController::class, 'register']);
+// Route::post('/login',[UserController::class, 'login']);

@@ -92,7 +92,8 @@
   <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-database.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
-
+    bebas = localStorage.getItem("uid");
+    console.log(bebas);
   // Import the functions you need from the SDKs you need
   
   // TODO: Add SDKs for Firebase products that you want to use
@@ -116,7 +117,7 @@
   firebase.initializeApp(firebaseConfig);
 
   firebase.database()
-  .ref("Urxw9gjZjGYojR5bwcAqH0q79G82")
+  .ref(localStorage.getItem("uid"))
   .on("value", (snapshot) => {
     cat = snapshot.val();
   })

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-require_once __DIR__.'\vendor\autoload.php';
+// require_once __DIR__.'\vendor\autoload.php';
 use Illuminate\Http\Request;
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\Contract\Auth;
@@ -32,7 +32,7 @@ class UserController extends Controller
     {
         $factory = (new Factory)->withServiceAccount('/firebase-credentials.json');
 
-$auth = $factory->createAuth();
+        $auth = $factory->createAuth();
 
         try {
             $email = $request-> email;
